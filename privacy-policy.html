@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='description' content='Privacy Policy for Kromia - Color Match Puzzle Game. Learn how we collect, use, and protect your data.'>
+    <meta name='author' content='KaiLing Studio'>
+    <title>Privacy Policy - Kromia Game</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/6bKxypz.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #5B4FE9;
+            --secondary: #00D9A3;
+            --accent: #FF6B9D;
+            --dark: #0A0A14;
+            --card-bg: #16213e;
+            --text-primary: #F8F8FC;
+            --text-secondary: #A8A8B8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation::before,
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .bg-animation::before {
+            background: var(--primary);
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+        
+        .bg-animation::after {
+            background: var(--accent);
+            bottom: -200px;
+            right: -200px;
+            animation-delay: 7s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.1); }
+            66% { transform: translate(-50px, 100px) scale(0.9); }
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, rgba(91, 79, 233, 0.2) 0%, rgba(157, 78, 221, 0.1) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .back-home:hover {
+            background: var(--primary);
+            transform: translateX(-4px);
+        }
+        
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(91, 79, 233, 0.4);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .header h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            position: relative;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+        }
+        
+        .last-updated {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            position: relative;
+        }
+        
+        /* Quick Navigation */
+        .quick-nav {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 32px 0;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .quick-nav h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .nav-link {
+            background: rgba(91, 79, 233, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            display: block;
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(91, 79, 233, 0.4);
+        }
+        
+        /* Section Cards */
+        .section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            border-color: rgba(91, 79, 233, 0.3);
+        }
+        
+        .section-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 15px;
+            box-shadow: 0 5px 15px rgba(91, 79, 233, 0.4);
+        }
+        
+        .section h2 {
+            display: flex;
+            align-items: center;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .section h3 {
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .section h3::before {
+            content: '▸';
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        /* Lists */
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .section li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .section li::before {
+            content: '●';
+            position: absolute;
+            left: 10px;
+            color: var(--primary);
+            font-size: 1.2em;
+        }
+        
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+        
+        .section strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background: rgba(0, 217, 163, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .warning-box {
+            background: rgba(255, 107, 157, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .highlight-box {
+            background: rgba(91, 79, 233, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .info-box strong,
+        .warning-box strong,
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .info-box p,
+        .warning-box p,
+        .highlight-box p {
+            color: var(--text-secondary);
+        }
+        
+        /* Links */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+        
+        /* Contact Section */
+        .contact-card {
+            background: linear-gradient(135deg, rgba(91, 79, 233, 0.9) 0%, rgba(255, 107, 157, 0.9) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate-gradient 20s linear infinite;
+        }
+        
+        @keyframes rotate-gradient {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .contact-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-card h2 {
+            color: white;
+            border: none;
+            margin-bottom: 20px;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: 800;
+        }
+        
+        .contact-card p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 24px;
+        }
+        
+        .contact-info {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .contact-info strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .contact-info span {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .email-link {
+            display: inline-block;
+            background: white;
+            color: var(--dark);
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .email-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .section {
+                padding: 25px 20px;
+            }
+            
+            .section h2 {
+                font-size: 1.4em;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-icon {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .back-home {
+                position: static;
+                margin: 0 auto 20px;
+                width: fit-content;
+            }
+        }
+        
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    
+    <!-- Header -->
+    <div class="header">
+        <a href="index.html" class="back-home">← Back to Home</a>
+        <img src="https://i.imgur.com/6bKxypz.png" alt="Kromia Logo" class="app-icon">
+        <h1>Privacy Policy</h1>
+        <div class="subtitle">Kromia – Color Match Puzzle Game</div>
+        <div class="last-updated">📅 Last updated: April 2026</div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Introduction -->
+        <div class="section">
+            <div class="highlight-box">
+                <p>This Privacy Policy describes how <strong>Kromia</strong> ("we", "us", or "our") collects, uses, and shares information about you when you use our mobile application <strong>Kromia – Color Match Puzzle Game</strong> ("App").</p>
+                <p style="margin-top: 15px;">By using the App, you agree to the collection and use of information in accordance with this Privacy Policy.</p>
+            </div>
+        </div>
+        
+        <!-- Quick Navigation -->
+        <div class="quick-nav">
+            <h3>📑 Quick Navigation</h3>
+            <div class="nav-grid">
+                <a href="#section-1" class="nav-link">1. Information We Collect</a>
+                <a href="#section-2" class="nav-link">2. How We Use Your Information</a>
+                <a href="#section-3" class="nav-link">3. How We Share Your Information</a>
+                <a href="#section-4" class="nav-link">4. Google AdMob & Advertising</a>
+                <a href="#section-5" class="nav-link">5. Data Retention</a>
+                <a href="#section-6" class="nav-link">6. Children's Privacy</a>
+                <a href="#section-7" class="nav-link">7. Data Security</a>
+                <a href="#section-8" class="nav-link">8. Your Rights</a>
+                <a href="#section-9" class="nav-link">9. Third-Party Services</a>
+                <a href="#section-10" class="nav-link">10. Changes to This Policy</a>
+            </div>
+        </div>
+        
+        <!-- Section 1 -->
+        <div class="section" id="section-1">
+            <h2><span class="section-number">1</span> Information We Collect</h2>
+            
+            <h3>1.1 Information You Provide</h3>
+            <p>When you sign in with Google, we collect:</p>
+            <ul>
+                <li>Your Google account display name</li>
+                <li>Your Google profile photo URL</li>
+                <li>Your Google account email address (used for authentication only)</li>
+                <li>Your selected display name and country (entered during onboarding)</li>
+            </ul>
+            
+            <h3>1.2 Information Collected Automatically</h3>
+            <p>When you use the App, we automatically collect:</p>
+            <ul>
+                <li>Game scores and results</li>
+                <li>Streak data and XP progress</li>
+                <li>Leaderboard rankings</li>
+                <li>Device information (operating system, device type)</li>
+                <li>App usage data (game sessions, features used)</li>
+                <li>IP address (collected by Firebase automatically)</li>
+            </ul>
+            
+            <h3>1.3 Information from Third Parties</h3>
+            <p>We receive information from:</p>
+            <ul>
+                <li>Google Sign-In (authentication data)</li>
+                <li>Google Firebase (data storage and analytics)</li>
+                <li>Google AdMob (advertising data)</li>
+            </ul>
+        </div>
+        
+        <!-- Section 2 -->
+        <div class="section" id="section-2">
+            <h2><span class="section-number">2</span> How We Use Your Information</h2>
+            <p>We use the information we collect to:</p>
+            <ul>
+                <li>Create and manage your game account</li>
+                <li>Display your name and profile on leaderboards</li>
+                <li>Track your game progress, XP, streaks, and rankings</li>
+                <li>Enable multiplayer and friend challenge features</li>
+                <li>Show relevant advertisements through Google AdMob</li>
+                <li>Improve the App and fix technical issues</li>
+                <li>Respond to your requests and support needs</li>
+            </ul>
+        </div>
+        
+        <!-- Section 3 -->
+        <div class="section" id="section-3">
+            <h2><span class="section-number">3</span> How We Share Your Information</h2>
+            
+            <h3>3.1 Public Information</h3>
+            <p>The following information is visible to other players:</p>
+            <ul>
+                <li>Your display name</li>
+                <li>Your profile photo</li>
+                <li>Your leaderboard scores and rankings</li>
+                <li>Your equipped title badges</li>
+                <li>Your country flag</li>
+            </ul>
+            
+            <h3>3.2 Service Providers</h3>
+            <p>We share data with trusted service providers:</p>
+            <ul>
+                <li>Google Firebase (Firestore database, Authentication, Analytics)</li>
+                <li>Google AdMob (advertising)</li>
+            </ul>
+            <p>These providers process data on our behalf and are bound by their own privacy policies.</p>
+            
+            <h3>3.3 We Do Not Sell Your Data</h3>
+            <div class="info-box">
+                <strong>✓ Your Privacy Matters</strong>
+                <p>We do not sell, rent, or trade your personal information to any third party.</p>
+            </div>
+        </div>
+        
+        <!-- Section 4 -->
+        <div class="section" id="section-4">
+            <h2><span class="section-number">4</span> Google AdMob and Advertising</h2>
+            <p>The App uses Google AdMob to display advertisements including:</p>
+            <ul>
+                <li>Banner ads (shown on the home screen)</li>
+                <li>Interstitial ads (shown between game sessions)</li>
+                <li>Rewarded ads (optional, for in-game benefits)</li>
+            </ul>
+            
+            <div class="warning-box">
+                <strong>⚠️ Personalized Ads</strong>
+                <p>AdMob may collect and use data to show personalized ads based on your interests. You can opt out of personalized ads in your device settings.</p>
+                <p style="margin-top: 10px;">For more information about how Google uses data:</p>
+                <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></p>
+            </div>
+        </div>
+        
+        <!-- Section 5 -->
+        <div class="section" id="section-5">
+            <h2><span class="section-number">5</span> Data Retention</h2>
+            <p>We retain your data as long as your account is active.</p>
+            <div class="info-box">
+                <strong>Account Deletion</strong>
+                <p>If you delete your account through the App settings, your personal data will be permanently deleted from our Firebase database within <strong>30 days</strong>.</p>
+                <p style="margin-top: 10px;"><strong>Note:</strong> Game statistics may be retained in anonymized form for leaderboard integrity purposes.</p>
+            </div>
+        </div>
+        
+        <!-- Section 6 -->
+        <div class="section" id="section-6">
+            <h2><span class="section-number">6</span> Children's Privacy</h2>
+            <p>The App is rated for users aged <strong>3 and above</strong> on Google Play.</p>
+            <div class="warning-box">
+                <strong>⚠️ Important Notice for Parents</strong>
+                <p>We do not knowingly collect personal information from children under 13 years of age without verifiable parental consent.</p>
+                <p style="margin-top: 15px;">If you believe we have collected information from a child under 13 without consent, please contact us immediately at the email address below and we will delete such information.</p>
+            </div>
+        </div>
+        
+        <!-- Section 7 -->
+        <div class="section" id="section-7">
+            <h2><span class="section-number">7</span> Data Security</h2>
+            <p>We use Google Firebase which provides industry-standard security measures to protect your data including:</p>
+            <ul>
+                <li>Encrypted data transmission (HTTPS/TLS)</li>
+                <li>Firebase Security Rules to protect database access</li>
+                <li>Google authentication for account security</li>
+            </ul>
+            <div class="warning-box">
+                <strong>⚠️ Security Disclaimer</strong>
+                <p>However, no method of transmission over the Internet is 100% secure. We cannot guarantee absolute security.</p>
+            </div>
+        </div>
+        
+        <!-- Section 8 -->
+        <div class="section" id="section-8">
+            <h2><span class="section-number">8</span> Your Rights</h2>
+            <p>You have the right to:</p>
+            <ul>
+                <li>Access the personal data we hold about you</li>
+                <li>Correct inaccurate data through the App settings</li>
+                <li>Delete your account and associated data</li>
+                <li>Opt out of personalized advertising</li>
+            </ul>
+            <div class="info-box">
+                <strong>✓ Exercise Your Rights</strong>
+                <p>To exercise these rights, use the account settings within the App or contact us at the email below.</p>
+            </div>
+        </div>
+        
+        <!-- Section 9 -->
+        <div class="section" id="section-9">
+            <h2><span class="section-number">9</span> Third-Party Services</h2>
+            <p>The App uses the following third-party services, each governed by their own Privacy Policy:</p>
+            
+            <div class="highlight-box" style="margin-top: 20px;">
+                <strong>🔐 Google Sign-In</strong>
+                <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">https://policies.google.com/privacy</a></p>
+            </div>
+            
+            <div class="highlight-box">
+                <strong>🔥 Google Firebase</strong>
+                <p><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">https://firebase.google.com/support/privacy</a></p>
+            </div>
+            
+            <div class="highlight-box">
+                <strong>📱 Google AdMob</strong>
+                <p><a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">https://support.google.com/admob/answer/6128543</a></p>
+            </div>
+        </div>
+        
+        <!-- Section 10 -->
+        <div class="section" id="section-10">
+            <h2><span class="section-number">10</span> Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by updating the "Last updated" date at the top of this page.</p>
+            <div class="info-box">
+                <strong>✓ Acceptance of Changes</strong>
+                <p>Your continued use of the App after any changes constitutes your acceptance of the updated Privacy Policy.</p>
+            </div>
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="contact-card">
+            <h2>💬 Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us:</p>
+            
+            <div class="contact-info">
+                <strong>📧 Email</strong>
+                <span>support.kailingstudio@gmail.com</span>
+            </div>
+            
+            <div class="contact-info">
+                <strong>🎮 App</strong>
+                <span>Kromia – Color Match Puzzle Game</span>
+            </div>
+            
+            <div class="contact-info">
+                <strong>👨‍💻 Developer</strong>
+                <span>KaiLing Studio</span>
+            </div>
+            
+            <a href="mailto:support.kailingstudio@gmail.com" class="email-link">Send Email</a>
+        </div>
+        
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2026 Kromia - KaiLing Studio. All rights reserved.</p>
+        <p style="margin-top: 10px;">Made with ❤️ for game lovers</p>
+    </div>
+    
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" onclick="scrollToTop()">
+        <span style="font-size: 24px;">↑</span>
+    </div>
+    
+    <script>
+        // Scroll to Top Functionality
+        window.onscroll = function() {
+            const scrollBtn = document.querySelector('.scroll-top');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        };
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
