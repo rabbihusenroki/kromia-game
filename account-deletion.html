@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='description' content='Request account deletion for Kromia - Color Match Puzzle Game. Delete your data securely.'>
+    <meta name='author' content='KaiLing Studio'>
+    <title>Account Deletion - Kromia Game</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/6bKxypz.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #5B4FE9;
+            --secondary: #00D9A3;
+            --accent: #FF6B9D;
+            --dark: #0A0A14;
+            --card-bg: #16213e;
+            --text-primary: #F8F8FC;
+            --text-secondary: #A8A8B8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --warning: #FFA500;
+            --danger: #FF4444;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation::before,
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .bg-animation::before {
+            background: var(--primary);
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+        
+        .bg-animation::after {
+            background: var(--accent);
+            bottom: -200px;
+            right: -200px;
+            animation-delay: 7s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.1); }
+            66% { transform: translate(-50px, 100px) scale(0.9); }
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, rgba(91, 79, 233, 0.2) 0%, rgba(157, 78, 221, 0.1) 100%);
+            padding: 80px 24px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-home:hover {
+            background: var(--primary);
+            transform: translateX(-4px);
+            box-shadow: 0 5px 20px rgba(91, 79, 233, 0.4);
+        }
+        
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(91, 79, 233, 0.4);
+            animation: bounce 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .header h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            margin-bottom: 10px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            position: relative;
+        }
+        
+        /* Warning Banner */
+        .warning-banner {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid var(--danger);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 32px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        
+        .warning-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .warning-content h3 {
+            color: var(--danger);
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .warning-content p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        
+        /* Section Cards */
+        .section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            border-color: rgba(91, 79, 233, 0.3);
+        }
+        
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .section h3 {
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .section li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .section li::before {
+            content: '●';
+            position: absolute;
+            left: 10px;
+            color: var(--primary);
+            font-size: 1.2em;
+            top: 12px;
+        }
+        
+        .section strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background: rgba(0, 217, 163, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .warning-box {
+            background: rgba(255, 165, 0, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .danger-box {
+            background: rgba(255, 68, 68, 0.1);
+            border-left: 4px solid var(--danger);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .info-box strong,
+        .warning-box strong,
+        .danger-box strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Email Section */
+        .email-section {
+            background: linear-gradient(135deg, rgba(91, 79, 233, 0.15), rgba(255, 107, 157, 0.15));
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .email-section h2 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 16px;
+            border: none;
+            padding: 0;
+        }
+        
+        .email-section p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        .email-display {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed var(--primary);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+        }
+        
+        .email-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 20px rgba(91, 79, 233, 0.5);
+            border-bottom: none;
+        }
+        
+        .email-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 0 30px rgba(91, 79, 233, 0.8);
+        }
+        
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+        }
+        
+        .step-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 30px;
+            counter-increment: step-counter;
+        }
+        
+        .step-item::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: 0 5px 15px rgba(91, 79, 233, 0.4);
+        }
+        
+        .step-item h4 {
+            color: var(--text-primary);
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .step-item p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        
+        /* Timeline */
+        .timeline {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .timeline-content {
+            flex: 1;
+        }
+        
+        .timeline-content strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .timeline-content span {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        
+        /* Links */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 80px 20px 50px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .section {
+                padding: 25px 20px;
+            }
+            
+            .back-home {
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .app-icon {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .email-section {
+                padding: 30px 20px;
+            }
+            
+            .email-display {
+                font-size: 15px;
+                padding: 16px;
+            }
+            
+            .warning-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-item {
+                padding-left: 50px;
+            }
+            
+            .step-item::before {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 70px 16px 40px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .section {
+                padding: 20px 16px;
+            }
+            
+            .back-home {
+                top: 15px;
+                left: 15px;
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .email-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    
+    <!-- Header -->
+    <div class="header">
+        <a href="index.html" class="back-home">← Back to Home</a>
+        <img src="https://i.imgur.com/6bKxypz.png" alt="Kromia Logo" class="app-icon">
+        <h1>Account Deletion Request</h1>
+        <p class="subtitle">Kromia – Color Match Puzzle Game</p>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Warning Banner -->
+        <div class="warning-banner">
+            <div class="warning-icon">⚠️</div>
+            <div class="warning-content">
+                <h3>Important: This Action is Permanent</h3>
+                <p>Once your account is deleted, all your game data, progress, and achievements will be permanently removed and cannot be recovered.</p>
+            </div>
+        </div>
+        
+        <!-- Introduction -->
+        <div class="section">
+            <h2>Delete Your KROMIA Account</h2>
+            <p>We understand that you may want to delete your KROMIA account and all associated data. This page explains how to request account deletion and what data will be removed.</p>
+            
+            <div class="info-box">
+                <strong>✓ User Rights</strong>
+                <p>You have the right to request deletion of your personal data at any time. We respect your privacy and will process your request promptly.</p>
+            </div>
+        </div>
+        
+        <!-- How to Request -->
+        <div class="section">
+            <h2>How to Request Account Deletion</h2>
+            
+            <div class="steps">
+                <div class="step-item">
+                    <h4>Send an Email</h4>
+                    <p>Email us at <strong>support.kailingstudio@gmail.com</strong></p>
+                </div>
+                
+                <div class="step-item">
+                    <h4>Use the Subject Line</h4>
+                    <p><strong>"Delete KROMIA Account"</strong></p>
+                </div>
+                
+                <div class="step-item">
+                    <h4>Include Required Information</h4>
+                    <p>Provide your Google Sign-In email and display name (optional)</p>
+                </div>
+                
+                <div class="step-item">
+                    <h4>Await Confirmation</h4>
+                    <p>You'll receive a confirmation email within 7 business days</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Email Template -->
+        <div class="email-section">
+            <h2>📧 Contact Us for Deletion</h2>
+            <p>Click the button below to send us a deletion request email</p>
+            
+            <div class="email-display">
+                support.kailingstudio@gmail.com
+            </div>
+            
+            <a href="mailto:support.kailingstudio@gmail.com?subject=Delete%20KROMIA%20Account&body=Hello%2C%0A%0AI%20would%20like%20to%20request%20deletion%20of%20my%20KROMIA%20account.%0A%0AMy%20Details%3A%0AGoogle%20Sign-In%20Email%3A%20%5BYour%20Email%5D%0ADisplay%20Name%3A%20%5BYour%20Name%5D%0A%0AThank%20you." class="email-btn">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M2 4L10 11L18 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Send Deletion Request
+            </a>
+        </div>
+        
+        <!-- What Gets Deleted -->
+        <div class="section">
+            <h2>What Data Will Be Deleted</h2>
+            <p>Upon account deletion, the following information will be permanently removed:</p>
+            
+            <ul>
+                <li>Your complete user profile</li>
+                <li>XP points and level progress</li>
+                <li>Streak data and daily login records</li>
+                <li>Inventory items and unlocked titles</li>
+                <li>Friends list and social connections</li>
+                <li>Challenge history and match records</li>
+                <li>Game settings and preferences</li>
+                <li>Leaderboard entries</li>
+            </ul>
+            
+            <div class="danger-box">
+                <strong>⚠️ Cannot Be Undone</strong>
+                <p>This deletion is permanent and irreversible. Make sure you want to proceed before submitting your request.</p>
+            </div>
+        </div>
+        
+        <!-- What May Be Retained -->
+        <div class="section">
+            <h2>Temporary Data Retention</h2>
+            <p>Some records may be retained temporarily for the following purposes:</p>
+            
+            <ul>
+                <li><strong>Legal Compliance:</strong> Required by law to maintain certain records</li>
+                <li><strong>Fraud Prevention:</strong> To prevent abuse and protect other users</li>
+                <li><strong>Backup Systems:</strong> Automated backups may retain data briefly</li>
+                <li><strong>Security Logs:</strong> System logs for security monitoring</li>
+            </ul>
+            
+            <div class="warning-box">
+                <strong>⏱️ Retention Period</strong>
+                <p>Temporary records will be deleted within <strong>30 days</strong> of your deletion request being processed.</p>
+            </div>
+        </div>
+        
+        <!-- Processing Timeline -->
+        <div class="section">
+            <h2>Processing Timeline</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">📧</div>
+                    <div class="timeline-content">
+                        <strong>Day 0: Request Received</strong>
+                        <span>We receive and verify your deletion request</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">🔍</div>
+                    <div class="timeline-content">
+                        <strong>Day 1-3: Verification</strong>
+                        <span>We verify your identity and account details</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">🗑️</div>
+                    <div class="timeline-content">
+                        <strong>Day 3-5: Deletion Process</strong>
+                        <span>Your data is removed from active systems</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">✅</div>
+                    <div class="timeline-content">
+                        <strong>Day 7: Confirmation</strong>
+                        <span>You receive confirmation email</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">🔒</div>
+                    <div class="timeline-content">
+                        <strong>Day 7-30: Backup Cleanup</strong>
+                        <span>Data removed from backup systems</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <strong>⏰ Standard Processing Time</strong>
+                <p>Requests are typically processed within <strong>7 business days</strong>. You will receive a confirmation email once the deletion is complete.</p>
+            </div>
+        </div>
+        
+        <!-- Alternatives -->
+        <div class="section">
+            <h2>Consider These Alternatives</h2>
+            <p>Before deleting your account, you might want to consider:</p>
+            
+            <ul>
+                <li><strong>Temporary Break:</strong> Simply uninstall the app instead of deleting data</li>
+                <li><strong>Data Export:</strong> Contact us to export your game statistics first</li>
+                <li><strong>Privacy Settings:</strong> Adjust your privacy settings within the app</li>
+                <li><strong>Contact Support:</strong> Discuss any concerns with our team first</li>
+            </ul>
+        </div>
+        
+        <!-- Support -->
+        <div class="section">
+            <h2>Need Help?</h2>
+            <p>If you have questions about account deletion or need assistance, please contact us:</p>
+            
+            <div class="info-box">
+                <strong>📧 Email Support</strong>
+                <p><a href="mailto:support.kailingstudio@gmail.com">support.kailingstudio@gmail.com</a></p>
+                <p style="margin-top: 8px;"><strong>Response Time:</strong> Within 24 hours</p>
+            </div>
+            
+            <div class="info-box" style="margin-top: 16px;">
+                <strong>📱 App Support</strong>
+                <p>You can also reach us through the in-app support feature in KROMIA settings.</p>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2026 Kromia - KaiLing Studio. All rights reserved.</p>
+        <p style="margin-top: 10px;">Your privacy and data rights are important to us</p>
+    </div>
+    
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
